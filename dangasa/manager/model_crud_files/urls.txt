@@ -1,0 +1,6 @@
+from django.urls import path
+from .views import {model_name}ApiView
+
+urlpatterns =[
+    path('{model_name}/list/', {model_name}ApiView.as_view()),
+    ]

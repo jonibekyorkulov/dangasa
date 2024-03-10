@@ -3,16 +3,21 @@
 import os
 import django
 import sys
-from .meneger.create_views import main_views
-from .meneger.create_serializers import main_serializers
-from .meneger.create_urls import main_urls
-from .meneger.create_settings import main_settings
-from .meneger.create_swagger_generators import main_swagger_generator
-from .meneger.create_swagger_schema import main_swagger_schema
-from .meneger.create_pagination import main_pagination
+from manager.create_views import main_views
+from manager.create_views import main_views
+from manager.create_serializers import main_serializers
+from manager.create_urls import main_urls
+# from manager.create_settings import main_settings
+# from manager.create_swagger_generators import main_swagger_generator
+# from manager.create_swagger_schema import main_swagger_schema
+# from manager.create_pagination import main_pagination
+from manager.config import DangasaConfig
 
 
 from django.apps import apps
+from django.conf import settings
+
+
 
 # Set the DJANGO_SETTINGS_MODULE environment variable
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
@@ -20,6 +25,13 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 # Configure Django settings
 django.setup(set_prefix=False)
 
+
+def get_project_name():
+    try:
+        return settings.ROOT_URLCONF.split('.')[0]
+    except AttributeError:
+        return None
+project_name = get_project_name()
 
 
 def get_model_fields(app_name, model_name):
@@ -42,17 +54,11 @@ def main():
     try:
         # Retrieve the model and print its fields
         fields = get_model_fields(app_name, model_name)
-        main_settings('core')
-        main_swagger_generator('core')
-        main_swagger_schema('core')
-        main_pagination('core')
+    
+        DangasaConfig(project_name).main()
         if fields is not None:
-            # print(f"Model: {model_name}")
-            # print(fields)
-            # for field in fields:
-            #     print(f"- {field}")
             
-            main_views(app_name, model_name, 'core')
+            main_views(app_name, model_name, project_name)
             main_serializers(app_name, model_name, fields)
             main_urls(app_name, model_name)
             
@@ -64,5 +70,5 @@ def main():
     except AttributeError:
         print(f"Error: Class '{model_name}' not found in module '{app_name}.models'.")
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
