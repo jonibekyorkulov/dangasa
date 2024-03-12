@@ -1,6 +1,8 @@
 from django.urls import path
-from .views import {model_name}ApiView
+from .views import (
+    {model_name}ListCreateApiView,
+    )
 
 urlpatterns =[
-    path('{model_name}/list/', {model_name}ApiView.as_view()),
-    ]
+path('{model_name}/list/', {model_name}ListCreateApiView.as_view()),
+]

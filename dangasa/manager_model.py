@@ -3,15 +3,11 @@
 import os
 import django
 import sys
-from manager.create_views import main_views
-from manager.create_views import main_views
-from manager.create_serializers import main_serializers
-from manager.create_urls import main_urls
-# from manager.create_settings import main_settings
-# from manager.create_swagger_generators import main_swagger_generator
-# from manager.create_swagger_schema import main_swagger_schema
-# from manager.create_pagination import main_pagination
+# from manager.create_views import main_views
+# from manager.create_serializers import main_serializers
+# from manager.create_urls import main_urls
 from manager.config import DangasaConfig
+from manager.model_manager import ModelManager
 
 
 from django.apps import apps
@@ -57,10 +53,10 @@ def main():
     
         DangasaConfig(project_name).main()
         if fields is not None:
-            
-            main_views(app_name, model_name, project_name)
-            main_serializers(app_name, model_name, fields)
-            main_urls(app_name, model_name)
+            ModelManager(app_name, model_name, project_name, fields).main()
+            # main_views(app_name, model_name, project_name)
+            # main_serializers(app_name, model_name, fields)
+            # main_urls(app_name, model_name)
             
         else:
             print(f"Error: Model '{model_name}' not found in app '{app_name}'.")
