@@ -3,11 +3,9 @@
 import os
 import django
 import sys
-# from manager.create_views import main_views
-# from manager.create_serializers import main_serializers
-# from manager.create_urls import main_urls
-from manager.config import DangasaConfig
-from manager.model_manager import ModelManager
+
+from dangasa.manager.config import DangasaConfig
+from dangasa.manager.model_manager import ModelManager
 
 
 from django.apps import apps
@@ -54,9 +52,6 @@ def main():
         DangasaConfig(project_name).main()
         if fields is not None:
             ModelManager(app_name, model_name, project_name, fields).main()
-            # main_views(app_name, model_name, project_name)
-            # main_serializers(app_name, model_name, fields)
-            # main_urls(app_name, model_name)
             
         else:
             print(f"Error: Model '{model_name}' not found in app '{app_name}'.")
@@ -66,5 +61,3 @@ def main():
     except AttributeError:
         print(f"Error: Class '{model_name}' not found in module '{app_name}.models'.")
 
-if __name__ == "__main__":
-    main()

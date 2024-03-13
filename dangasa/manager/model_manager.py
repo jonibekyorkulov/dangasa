@@ -12,10 +12,92 @@ class ModelManager:
         self.fields = fields
     
     def create_views(self):
-        pass
-    
+        try:
+            app_name = self.app_name+'/views.py'
+            if os.path.exists(app_name):
+                
+                self.add_views_file()
+            else:
+                # Create a new Python file
+                self.create_views_file()
+        except Exception as e:
+            print(str(e))
+            
+    def create_views_file(self):
+        try:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+
+            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
+            source_file = os.path.join(current_dir, 'model_crud_files/views.txt')
+
+            new_text_file = Path(source_file)
+            content = new_text_file.read_text()
+
+            replacement_dict = {
+                '{model_name}': self.model_name,  
+                '{project_name}': self.project_name
+            }
+            
+            for key, value in replacement_dict.items():
+                content = content.replace(key, value)
+                
+            new_py_file = Path(self.app_name+'/views.py')
+            new_py_file.write_text(content)
+            
+            print(f"views.py '{self.app_name}' created successfully.")
+        except FileNotFoundError:
+            print("views.py fayli topilmadi.")
+        except PermissionError:
+            print(f"Ruxsat mavjud emas '{self.app_name}' papkasiga nusxalash uchun.")
+        except Exception as e:
+            print(f"Xatolik yuz berdi: {e}") 
+            
+    def add_views_file(self):
+        print('add_views_file')
+
+              
     def create_serializers(self):
-        pass
+        try:
+            app_name = self.app_name+'/serializers.py'
+            if os.path.exists(app_name):
+                self.add_serializers_file()
+            else:
+                # Create a new Python file
+                self.create_serializers_file()
+        except Exception as e:
+            print(str(e))
+            
+    def create_serializers_file(self):
+        try:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+
+            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
+            source_file = os.path.join(current_dir, 'model_crud_files/serializers.txt')
+
+            new_text_file = Path(source_file)
+            content = new_text_file.read_text()
+
+            replacement_dict = {
+                '{model_name}': self.model_name,  
+                '{fields}': '( '+', '.join([f"'{field[0]}'" for field in self.fields]) + ', )',
+            }
+            
+            for key, value in replacement_dict.items():
+                content = content.replace(key, value)
+                
+            new_py_file = Path(self.app_name+'/serializers.py')
+            new_py_file.write_text(content)
+            
+            print(f"serializers.py '{self.app_name}' created successfully.")
+        except FileNotFoundError:
+            print("serializers.py fayli topilmadi.")
+        except PermissionError:
+            print(f"Ruxsat mavjud emas '{self.app_name}' papkasiga nusxalash uchun.")
+        except Exception as e:
+            print(f"Xatolik yuz berdi: {e}")
+            
+    def add_serializers_file(self):
+        print('add_serializers_file')
     
     def create_urls(self):
         try:
