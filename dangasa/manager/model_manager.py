@@ -28,7 +28,7 @@ class ModelManager:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
             # Faylni to'liq yo'l (absolute path) bilan topib olamiz
-            source_file = os.path.join(current_dir, 'model_crud_files/views.txt')
+            source_file = os.path.join(current_dir, 'model_crud_files/views.py-tpl')
 
             new_text_file = Path(source_file)
             content = new_text_file.read_text()
@@ -53,8 +53,56 @@ class ModelManager:
             print(f"Xatolik yuz berdi: {e}") 
             
     def add_views_file(self):
-        print('add_views_file')
+        old_py_file = Path(self.app_name+'/views.py')
+        content = old_py_file.read_text()
+        modules_to_import = [
+            '\nfrom rest_framework.permissions import AllowAny',
 
+            '\nfrom rest_framework.response import Response',
+
+            '\nfrom core.pagination import CustomPagination',
+
+            '\nfrom rest_framework import generics',
+
+            f'\nfrom .models import {self.model_name}',
+
+            f'\nfrom .serializers import {self.model_name}Serializer',
+        ]
+        
+        new_models_to_add = {self.model_name}
+        new_serializers_to_add = f'{self.model_name}Serializer'
+
+        import_pattern = re.compile(r'import\s+(.*?)(?=\s|from|$)', re.MULTILINE)
+
+        models_import_pattern = re.compile(r'from\s+\.\w+\s+import\s+', re.DOTALL)
+        serializers_import_pattern = re.compile(r'from\s+\.\w+\s+import\s+', re.DOTALL)
+
+        match = import_pattern.search(content)
+
+        if match:
+            # Izlash natijasini topish
+            end_index = match.end()
+
+            # Modullarni qo'shish
+            new_content = content[:end_index]
+            for module_to_import in modules_to_import:
+                new_content += module_to_import + '\n'
+            new_content += '\n' + content[end_index:]
+
+        else:
+            print("Import statement not found in the file.")
+
+        
+        new_py_file = Path(self.app_name+'/views.py')
+        new_py_file.write_text(new_content)
+        
+        
+        print(f"views.py  '{self.app_name}' update successfully.")
+
+
+
+        
+        
               
     def create_serializers(self):
         try:
@@ -72,7 +120,7 @@ class ModelManager:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
             # Faylni to'liq yo'l (absolute path) bilan topib olamiz
-            source_file = os.path.join(current_dir, 'model_crud_files/serializers.txt')
+            source_file = os.path.join(current_dir, 'model_crud_files/serializers.py-tpl')
 
             new_text_file = Path(source_file)
             content = new_text_file.read_text()
@@ -120,7 +168,7 @@ class ModelManager:
         new_views_to_add = f'{self.model_name}ListCreateApiView,'
         if new_data_to_add not in content:
             pattern = re.compile(r'urlpatterns\s*=\s*\[\s*', re.DOTALL)
-            import_pattern = re.compile(r'\(([^)]*)\)', re.DOTALL)
+            import_pattern = re.compile(r'from\s+\.views\s+import\s+', re.DOTALL)
 
 
             
@@ -154,7 +202,7 @@ class ModelManager:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
             # Faylni to'liq yo'l (absolute path) bilan topib olamiz
-            source_file = os.path.join(current_dir, 'model_crud_files/urls.txt')
+            source_file = os.path.join(current_dir, 'model_crud_files/urls.py-tpl')
 
             new_text_file = Path(source_file)
             content = new_text_file.read_text()

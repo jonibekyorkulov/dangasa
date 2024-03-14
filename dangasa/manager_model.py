@@ -4,8 +4,8 @@ import os
 import django
 import sys
 
-from dangasa.manager.config import DangasaConfig
-from dangasa.manager.model_manager import ModelManager
+from manager.config import DangasaConfig
+from manager.model_manager import ModelManager
 
 
 from django.apps import apps
@@ -41,8 +41,8 @@ def get_model_fields(app_name, model_name):
 
 def main():
     # Customize the app_name and model_name according to your project
-    app_name = sys.argv[1]
-    model_name = sys.argv[2]
+    app_name = sys.argv[2]
+    model_name = sys.argv[3]
     
 
     try:
