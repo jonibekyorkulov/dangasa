@@ -1,0 +1,16 @@
+class {model_name}ListCreateApiView(generics.ListCreateAPIView):
+	queryset = {model_name}.objects.all()
+	serializer_class = {model_name}Serializer
+	pagination_class = CustomPagination
+	permission_classes = [AllowAny]
+
+	def list(self, request, *args, **kwargs):
+		# You can customize the 'list' function here
+		response = super().list(request, *args, **kwargs)
+		# Additional logic or modification to the response data
+		return response
+
+	def get_queryset(self):
+        # You can customize the 'get_queryset' function here
+		return super().get_queryset()
+    
