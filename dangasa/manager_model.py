@@ -4,8 +4,8 @@ import os
 import django
 import sys
 
-from manager.config import DangasaConfig
-from manager.model_manager import ModelManager
+from dangasa.manager.config import DangasaConfig
+from dangasa.manager.model_manager import ModelManager
 
 
 from django.apps import apps

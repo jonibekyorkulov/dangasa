@@ -1,9 +1,12 @@
 from setuptools import setup, find_packages
 
 # Read the contents of your text file
-with open('path/to/your/file.txt', 'r') as file:
-    file_content = file.read()
+def read_file(filename):
+    with open(filename, 'r') as file:
+        return file.read()
 
+# Read the contents of README.md
+readme_content = read_file('README.md')
 
 # List of template files
 template_files = [
@@ -21,7 +24,7 @@ setup(
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
-    long_description=file_content,
+    long_description=readme_content,
     long_description_content_type='text/plain',
     url='https://github.com/jonibekyorkulov/dangasa',
     packages=find_packages(),

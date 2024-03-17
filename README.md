@@ -1,6 +1,6 @@
 # Dangasa
 
-Dangasa, Django REST frameworkida CRUD (Create, Read, Update, Delete) operatsiyalarni tezroq yaratishga yordam beradigan avtomatlashtirilgan kutubxona.
+Dangasa, Django REST frameworkida CRUD (Create, Read, Update, Delete) operatsiyalarni tezroq yaratishga yordam beradigan avtomatlashtirilgan kutubxona. Faqat tayyor modellar uchun xizmat qiladi.
 
 ## Foydalanish
 Dangasa kutubxonasini ishlatish uchun foydalanuvchi quyidagi qadamlarni amalga oshirishi kerak:
