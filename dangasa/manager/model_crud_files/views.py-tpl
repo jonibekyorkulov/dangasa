@@ -1,12 +1,11 @@
 from rest_framework.permissions import AllowAny
 
+from .models import {model_name}
+
+from .serializers import {model_name}Serializer
+
 from rest_framework.response import Response
 
 from {project_name}.pagination import CustomPagination
 
 from rest_framework import generics
-
-
-from .models import {model_name}
-
-from .serializers import {model_name}Serializer
