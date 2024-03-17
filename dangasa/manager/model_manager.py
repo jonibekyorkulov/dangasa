@@ -128,7 +128,7 @@ class ModelManager:
             
             
         content_retrive = str()
-        if (f'{self.model_name}RetrieveAPIView' not in content):   
+        if (f'{self.model_name}RetrieveUpdateDestroyAPIView' not in content):   
             current_dir = os.path.dirname(os.path.abspath(__file__))
             source_file_retrive = os.path.join(current_dir, 'model_crud_files/RetrieveAPIView.py-tpl')
             
@@ -347,16 +347,20 @@ class ModelManager:
         old_py_file = Path(self.app_name+'/urls.py')
         content = old_py_file.read_text()
         new_data_to_add = f"path('{self.model_name}/list/', {self.model_name}ListCreateApiView.as_view()),\n"
+        new_data_to_add_retrive = f"path('{self.model_name}/<int:pk>/', {self.model_name}RetrieveUpdateDestroyAPIView.as_view()),\n"
         new_views_to_add = f'{self.model_name}ListCreateApiView,'
-        if new_data_to_add not in content and new_data_to_add not in content:
-            pattern = re.compile(r'urlpatterns\s*=\s*\[\s*', re.DOTALL)
-            import_pattern = re.compile(r'from\s+\.views\s+import\s+', re.DOTALL)
+        new_views_to_add_retrive = f'{self.model_name}RetrieveUpdateDestroyAPIView,'
+        pattern = re.compile(r'urlpatterns\s*=\s*\[\s*', re.DOTALL)
+        import_pattern = re.compile(r'from\s+\.views\s+import\s+', re.DOTALL)
+        
+        match = pattern.search(content)
+        match_import = import_pattern.search(content)
+        
+        
             
-            match = pattern.search(content)
-            match_import = import_pattern.search(content)
-            
-            if match and match_import :
-                # Izlash natijasini topish
+        if match and match_import :
+            if new_data_to_add not in content and new_data_to_add_retrive not in content:
+            # Izlash natijasini topish
                 start_index = match.end()
                 
                 end_index_import = match_import.end()
@@ -364,8 +368,10 @@ class ModelManager:
                 # Malumotni qo'shish
                 
                 new_content = content[:start_index] + new_data_to_add + '\n' + content[start_index:]
+                new_content = new_content[:start_index] + new_data_to_add_retrive + '\n' + new_content[start_index:]
                 
                 new_content_import = new_content[:end_index_import ] + new_views_to_add  + new_content[end_index_import:]
+                new_content_import = new_content_import[:end_index_import ] + new_views_to_add_retrive  + new_content_import[end_index_import:]
                 
                 
                 # Faylni qayta yozish
@@ -374,35 +380,37 @@ class ModelManager:
                 
                 
                 print(f"urls.py  '{self.app_name}' update successfully.")
-                
-
             else:
-                try:
-                    current_dir = os.path.dirname(os.path.abspath(__file__))
+                print(f"urls.py < {self.model_name}RetrieveUpdateDestroyAPIView > or < {self.model_name}ListCreateApiView > alredy used.")
+            
 
-                    # Faylni to'liq yo'l (absolute path) bilan topib olamiz
-                    source_file = os.path.join(current_dir, 'model_crud_files/urls.py-tpl')
+        else:
+            try:
+                current_dir = os.path.dirname(os.path.abspath(__file__))
 
-                    new_text_file = Path(source_file)
-                    content = new_text_file.read_text()
+                # Faylni to'liq yo'l (absolute path) bilan topib olamiz
+                source_file = os.path.join(current_dir, 'model_crud_files/urls.py-tpl')
 
-                    replacement_dict = {
-                        '{model_name}': self.model_name,  
-                    }
+                new_text_file = Path(source_file)
+                content = new_text_file.read_text()
+
+                replacement_dict = {
+                    '{model_name}': self.model_name,  
+                }
+                
+                for key, value in replacement_dict.items():
+                    content = content.replace(key, value)
                     
-                    for key, value in replacement_dict.items():
-                        content = content.replace(key, value)
-                        
-                    new_py_file = Path(self.app_name+'/urls.py')
-                    new_py_file.write_text(content)
-                    
-                    print(f"urls.py '{self.app_name}' update successfully.")
-                except FileNotFoundError:
-                    print("urls.py fayli topilmadi.")
-                except PermissionError:
-                    print(f"Ruxsat mavjud emas '{self.app_name}' papkasiga nusxalash uchun.")
-                except Exception as e:
-                    print(f"Xatolik yuz berdi: {e}")
+                new_py_file = Path(self.app_name+'/urls.py')
+                new_py_file.write_text(content)
+                
+                print(f"urls.py '{self.app_name}' update successfully.")
+            except FileNotFoundError:
+                print("urls.py fayli topilmadi.")
+            except PermissionError:
+                print(f"Ruxsat mavjud emas '{self.app_name}' papkasiga nusxalash uchun.")
+            except Exception as e:
+                print(f"Xatolik yuz berdi: {e}")
         
     
     def create_urls_file(self):
