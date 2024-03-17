@@ -30,9 +30,14 @@ class ModelManager:
             # Faylni to'liq yo'l (absolute path) bilan topib olamiz
             source_file_main = os.path.join(current_dir, 'model_crud_files/views.py-tpl')
             source_file_list_create = os.path.join(current_dir, 'model_crud_files/ListCreateApiView.py-tpl')
+            source_file_retrive = os.path.join(current_dir, 'model_crud_files/RetrieveAPIView.py-tpl')
+            
 
             new_text_file_main = Path(source_file_main)
             content_main = new_text_file_main.read_text()
+            
+            new_text_file_retrive = Path(source_file_retrive)
+            content_retrive = new_text_file_retrive.read_text()
 
             new_text_file_list_create = Path(source_file_list_create)
             content_list_create = new_text_file_list_create.read_text()
@@ -45,9 +50,11 @@ class ModelManager:
             for key, value in replacement_dict.items():
                 content_main = content_main.replace(key, value)
                 content_list_create = content_list_create.replace(key, value)
+                content_retrive = content_retrive.replace(key, value)
+                
                 
             new_py_file = Path(self.app_name+'/views.py')
-            new_py_file.write_text(content_main + '\n' + content_list_create)
+            new_py_file.write_text(content_main + '\n' + content_list_create + '\n' + content_retrive)
             
             print(f"views.py '{self.app_name}' created successfully.")
         except FileNotFoundError:
@@ -61,7 +68,7 @@ class ModelManager:
         old_py_file = Path(self.app_name+'/views.py')
         content = old_py_file.read_text()
         modules_to_import = [
-            '\nfrom rest_framework.permissions import AllowAny',
+            'from rest_framework.permissions import AllowAny',
 
             '\nfrom rest_framework.response import Response',
 
@@ -98,13 +105,13 @@ class ModelManager:
             print("Import statement not found in the file.")
             
         content_list_create = str()
-        if f'{self.model_name}ListCreateApiView' not in content:   
+        if (f'{self.model_name}ListCreateApiView' not in content):   
             current_dir = os.path.dirname(os.path.abspath(__file__))
             source_file_list_create = os.path.join(current_dir, 'model_crud_files/ListCreateApiView.py-tpl')
             
             new_text_file_list_create = Path(source_file_list_create)
             content_list_create = new_text_file_list_create.read_text()
-
+            
             replacement_dict = {
                 '{model_name}': self.model_name,  
                 '{project_name}': self.project_name
@@ -118,16 +125,35 @@ class ModelManager:
             print(f"views.py  '{self.app_name}' update successfully.")
         else:
             print(f"views.py  < {self.model_name}ListCreateApiView >  already exists.")
+            
+            
+        content_retrive = str()
+        if (f'{self.model_name}RetrieveAPIView' not in content):   
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            source_file_retrive = os.path.join(current_dir, 'model_crud_files/RetrieveAPIView.py-tpl')
+            
+            new_text_file_retrive = Path(source_file_retrive)
+            content_retrive = new_text_file_retrive.read_text()
+            
+            replacement_dict = {
+                '{model_name}': self.model_name,  
+                '{project_name}': self.project_name
+            }
+            
+            for key, value in replacement_dict.items():
+                content_retrive = content_retrive.replace(key, value)
+                
+            
+            
+            print(f"views.py  '{self.app_name}' update successfully.")
+        else:
+            print(f"views.py  < {self.model_name}RetrieveAPIView >  already exists.")
         
         
         new_py_file = Path(self.app_name+'/views.py')
-        new_py_file.write_text(new_content + '\n' + content_list_create)
+        new_py_file.write_text(new_content + '\n' + content_list_create + '\n' + content_retrive)
         
 
-
-
-        
-        
               
     def create_serializers(self):
         try:
@@ -377,6 +403,7 @@ class ModelManager:
                     print(f"Ruxsat mavjud emas '{self.app_name}' papkasiga nusxalash uchun.")
                 except Exception as e:
                     print(f"Xatolik yuz berdi: {e}")
+        
     
     def create_urls_file(self):
         try:

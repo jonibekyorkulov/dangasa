@@ -7,3 +7,4 @@ class {model_name}Serializer(serializers.ModelSerializer):
         #Validate any fields
 		return super().validate(attrs)
     
+	

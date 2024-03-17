@@ -14,3 +14,4 @@ class {model_name}ListCreateApiView(generics.ListCreateAPIView):
         # You can customize the 'get_queryset' function here
 		return super().get_queryset()
     
+	

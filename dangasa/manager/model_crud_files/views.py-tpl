@@ -9,3 +9,4 @@ from rest_framework.response import Response
 from {project_name}.pagination import CustomPagination
 
 from rest_framework import generics
+

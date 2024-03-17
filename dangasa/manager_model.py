@@ -44,7 +44,6 @@ def main():
     app_name = sys.argv[2]
     model_name = sys.argv[3]
     
-
     try:
         # Retrieve the model and print its fields
         fields = get_model_fields(app_name, model_name)

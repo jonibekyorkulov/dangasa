@@ -30,3 +30,4 @@ class {model_name}ModelTestCase(TestCase):
         self.test_obj_1.delete()
         with self.assertRaises({model_name}.DoesNotExist):
             {model_name}.objects.get({fields_first}={fields_delete_obj_1})
+

@@ -1,0 +1,16 @@
+class {model_name}RetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = {model_name}Serializer
+    lookup_field = 'pk'  # Change 'pk' to the field you want to use for lookup
+    
+    def get_queryset(self):
+        # Optionally, customize the queryset based on specific conditions
+        return {model_name}.objects.all()
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        # Get the object based on lookup_field
+        obj = generics.get_object_or_404(queryset, **{self.lookup_field: self.kwargs[self.lookup_url_kwarg]})
+        # Optionally, you can perform additional checks or modifications on the object here
+        return obj
+
+        
