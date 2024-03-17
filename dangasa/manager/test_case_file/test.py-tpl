@@ -4,29 +4,29 @@ from .models import {model_name}
 class {model_name}ModelTestCase(TestCase):
     def setUp(self):
         # Test obyektlarini yaratamiz
-        self.test_obj_1 = {model_name}.objects.create({fields_setup})
-        self.test_obj_2 = {model_name}.objects.create({fields_setup})
+        self.test_obj_1 = {model_name}.objects.create({fields_setup_obj_1})
+        self.test_obj_2 = {model_name}.objects.create({fields_setup_obj_2})
 
-    def {model_name}_create(self):
+    def {model_name_function}_create(self):
         # Yaratilgan test obyektlarini test qilamiz
-        self.assertEqual({fields_create})
-        self.assertEqual({fields_create})
+        self.assertEqual({fields_create_obj_1})
+        self.assertEqual({fields_create_obj_2})
 
-    def {model_name}_read(self):
+    def {model_name_function}_read(self):
         # Test obyektlarini o'qib olamiz
-        test_obj_1_db = Test.objects.get({fields_read})
-        test_obj_2_db = Test.objects.get({fields_read})
-        self.assertEqual({fields_read_equal})
-        self.assertEqual({fields_read_equal})
+        test_obj_1_db = {model_name}.objects.get({fields_read_obj_1})
+        test_obj_2_db = {model_name}.objects.get({fields_read_obj_2})
+        self.assertEqual({fields_read_equal_obj_1})
+        self.assertEqual({fields_read_equal_obj_2})
 
-    def {model_name}_update(self):
+    def {model_name_function}_update(self):
         # Test obyektlarni yangilaymiz
-        self.test_obj_1.title1 = "Updated Title 1"
+        self.test_obj_1.{fields_first} = "{update_text}"
         self.test_obj_1.save()
-        self.assertEqual(self.test_obj_1.title1, "Updated Title 1")
+        self.assertEqual(self.test_obj_1.{fields_first}, "{update_text}")
 
-    def {model_name}_delete(self):
+    def {model_name_function}_delete(self):
         # Test obyektlarni o'chiramiz
-        self.test_obj_2.delete()
+        self.test_obj_1.delete()
         with self.assertRaises({model_name}.DoesNotExist):
-            {model_name}.objects.get(title1="Test Title 4")
+            {model_name}.objects.get({fields_first}={fields_delete_obj_1})

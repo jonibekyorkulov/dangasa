@@ -165,10 +165,7 @@ class ModelManager:
                 new_text_file_list_create = Path(source_file_list_create)
                 content_list_create = new_text_file_list_create.read_text()
 
-                replacement_dict = {
-                    '{model_name}': self.model_name,  
-                    '{fields}': '( '+', '.join([f"'{field[0]}'" for field in self.fields]) + ', )',
-                }
+                
                 
                 for key, value in replacement_dict.items():
                     content_list_create = content_list_create.replace(key, value)
@@ -265,7 +262,60 @@ class ModelManager:
             print(str(e))
     
     def create_tests(self):
+        try:
+            app_name = self.app_name+'/tests.py'
+            if os.path.exists(app_name):
+                self.add_tests_file()
+            else:
+            # Create a new Python file
+                self.create_tests_file()
+        except Exception as e:
+            print(str(e))
+            
+    
+    def add_tests_file(self):
         pass
+    
+    
+    def create_tests_file(self):
+        try:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+
+            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
+            source_file = os.path.join(current_dir, 'test_case_file/test.py-tpl')
+
+            new_text_file = Path(source_file)
+            content = new_text_file.read_text()
+
+            replacement_dict = {
+                '{model_name}': self.model_name,  
+                '{model_name_function}': self.model_name.lower(),  
+                '{fields_setup_obj_1}' : ', '.join([f"{field[0]}='{self.model_name} {field[0]} 1'" for field in self.fields if field[0] not in ['id', 'uuid']]),
+                '{fields_setup_obj_2}' : ', '.join([f"{field[0]}='{self.model_name} {field[0]} 2'" for field in self.fields if field[0] not in ['id', 'uuid']]),
+                '{fields_create_obj_1}' : f'self.test_obj_1.{self.fields[1][0]}, "{self.model_name} {self.fields[1][0]} 1"',
+                '{fields_create_obj_2}' : f'self.test_obj_2.{self.fields[1][0]}, "{self.model_name} {self.fields[1][0]} 2"',
+                '{fields_read_obj_1}' : f"{self.fields[1][0]}='{self.model_name} {self.fields[1][0]} 1'",        
+                '{fields_read_obj_2}' : f"{self.fields[1][0]}='{self.model_name} {self.fields[1][0]} 2'",
+                '{fields_read_equal_obj_1}' : f"test_obj_1_db.{self.fields[1][0]}, '{self.model_name} {self.fields[1][0]} 1'", 
+                '{fields_read_equal_obj_2}' : f"test_obj_2_db.{self.fields[1][0]}, '{self.model_name} {self.fields[1][0]} 2'",
+                '{fields_first}' : f"{self.fields[1][0]}",
+                '{update_text}' : f"Update Text {self.model_name} {self.fields[1][0]}",
+                '{fields_delete_obj_1}' : f"'{self.model_name} {self.fields[1][0]} 1'"
+            }
+            
+            for key, value in replacement_dict.items():
+                content = content.replace(key, value)
+                
+            new_py_file = Path(self.app_name+'/tests.py')
+            new_py_file.write_text(content)
+            
+            print(f"tests.py '{self.app_name}' created successfully.")
+        except FileNotFoundError:
+            print("tests.py fayli topilmadi.")
+        except PermissionError:
+            print(f"Ruxsat mavjud emas '{self.app_name}' papkasiga nusxalash uchun.")
+        except Exception as e:
+            print(f"Xatolik yuz berdi: {e}")
     
     def add_urls_file(self):
         old_py_file = Path(self.app_name+'/urls.py')
