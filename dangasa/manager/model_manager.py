@@ -66,7 +66,7 @@ class ModelManager:
         old_py_file = Path(self.app_name+'/views.py')
         content = old_py_file.read_text()
         modules_to_import = [
-            'from rest_framework.permissions import AllowAny',
+            '\nfrom rest_framework.permissions import AllowAny',
 
             '\nfrom rest_framework.response import Response',
 

@@ -1,3 +1,25 @@
+Metadata-Version: 2.1
+Name: Dangasa
+Version: 0.1.0
+Summary: Everything is very fast with Dangasa
+Home-page: https://github.com/jonibekyorkulov/dangasa
+Author: Jonibek Yorkulov
+Author-email: jonibekyorkulov@gmail.com
+Project-URL: Bug Reports, https://github.com/jonibekyorkulov/dangasa/issues
+Project-URL: Source, https://github.com/jonibekyorkulov/dangasa
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/plain
+License-File: LICENSE
+
 # Dangasa
 
 Dangasa, Django REST frameworkida CRUD (Create, Read, Update, Delete) operatsiyalarni tezroq yaratishga yordam beradigan avtomatlashtirilgan kutubxona. Faqat tayyor modellar uchun xizmat qiladi.
@@ -8,7 +30,13 @@ Dangasa kutubxonasini ishlatish uchun foydalanuvchi quyidagi qadamlarni amalga o
 # O'rnatish
 Birinchi navbatda, quidagi kutubxonalarni o'rnatishingiz kerak:
 
+`pip install django`
+
+`pip install djangorestframework`
+
 `pip install dangasa`
+
+`pip install typing-extensions`
 
 # Loyihani yaratish
 Loyihani yaratish uchun quyidagi qadam-larni bajaring: (yaratilayotgan loyiha 'core'  bo'lishi shart)
@@ -25,6 +53,18 @@ Loyiha sozlamalarini o'zgartirish uchun quyidagi qadam-larni bajaring:
 INSTALLED_APPS = [
     ...
     'home',
+]
+```
+
+# urls.py faylini o'zgartirish
+Loyiha sozlamalarini o'zgartirish uchun quyidagi qadam-larni bajaring:
+
+```python
+from django.urls import path, include
+
+urlpatterns = [
+    ...
+    path('', include('home.urls')),
 ]
 ```
 
@@ -48,18 +88,6 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-
-# urls.py faylini o'zgartirish
-Loyiha sozlamalarini o'zgartirish uchun quyidagi qadam-larni bajaring:
-
-```python
-from django.urls import path, include
-
-urlpatterns = [
-    ...
-    path('', include('home.urls')),
-]
-```
 
 # manage.py faylini quidagicha o'zgartiring
 

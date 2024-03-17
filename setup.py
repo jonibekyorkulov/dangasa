@@ -47,6 +47,7 @@ setup(
         'djangorestframework==3.14.0',
         'drf-yasg==1.21.6',
         'typing-extensions==4.10.0',
+        'coreapi==2.3.3',
     ],
     extras_require={
         # Define additional dependencies for extra features
