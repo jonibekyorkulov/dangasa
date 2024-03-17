@@ -4,7 +4,7 @@ class {model_name}Serializer(serializers.ModelSerializer):
 		fields = {fields}
 
 	def validate(self, attrs):
-        #Validate any fields
+        # Validate any fields
 		return super().validate(attrs)
     
 	

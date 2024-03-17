@@ -12,11 +12,8 @@ from django.apps import apps
 from django.conf import settings
 
 
-
-# Set the DJANGO_SETTINGS_MODULE environment variable
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 
-# Configure Django settings
 django.setup(set_prefix=False)
 
 
@@ -40,12 +37,12 @@ def get_model_fields(app_name, model_name):
         return None
 
 def main():
-    # Customize the app_name and model_name according to your project
+    
     app_name = sys.argv[2]
     model_name = sys.argv[3]
     
     try:
-        # Retrieve the model and print its fields
+        
         fields = get_model_fields(app_name, model_name)
     
         DangasaConfig(project_name).main()

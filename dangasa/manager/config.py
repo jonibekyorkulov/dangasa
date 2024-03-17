@@ -16,7 +16,6 @@ class DangasaConfig:
             if os.path.exists(pro_name):
                 print("dangasa_settings.py already exists!")
             else:
-            # Create a new Python file
                 self.create_settings_file()
                 self.append_main_settings()
         except Exception as e:
@@ -28,7 +27,6 @@ class DangasaConfig:
             if os.path.exists(pro_name):
                 print("generator.py already exists!")
             else:
-            # Create a new Python file
                 self.create_swagger_generator_file()
         except Exception as e:
             print(str(e))
@@ -39,13 +37,11 @@ class DangasaConfig:
             if os.path.exists(pro_name):
                 print("schema.py already exists!")
             else:
-            # Create a new Python file
                 self.create_swagger_schema_file()
                 
             if os.path.exists(self.project_name+"/urls.py"):
                 self.create_url_add_file()
             else:
-            # Create a new Python file
                 print(f"'{self.project_name}' urls.py does not exists!")
         except Exception as e:
             print(str(e))
@@ -56,7 +52,6 @@ class DangasaConfig:
             if os.path.exists(pro_name):
                 print("pagination.py already exists!")
             else:
-            # Create a new Python file
                 self.create_pagination_file()
         except Exception as e:
             print(str(e))
@@ -65,10 +60,8 @@ class DangasaConfig:
         try:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
-            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
             source_file = os.path.join(current_dir, 'config_files/dangasa_settings.py')
 
-            # shutil modulining copy funksiyasi orqali faylni nusxalash
             shutil.copy(source_file, self.project_name)
             print(f"dangasa_settings.py create to '{self.project_name}' created successfully.")
         except FileNotFoundError:
@@ -93,10 +86,8 @@ class DangasaConfig:
         try:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
-            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
             source_file = os.path.join(current_dir, 'config_files/generator.py')
 
-            # shutil modulining copy funksiyasi orqali faylni nusxalash
             shutil.copy(source_file, self.project_name)
             print(f"generator.py create to '{self.project_name}' created successfully.")
         except FileNotFoundError:
@@ -111,10 +102,8 @@ class DangasaConfig:
         try:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
-            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
             source_file = os.path.join(current_dir, 'config_files/schema.py')
 
-            # shutil modulining copy funksiyasi orqali faylni nusxalash
             shutil.copy(source_file, self.project_name)
             print(f"schema.py create to '{self.project_name}' created successfully.")
         except FileNotFoundError:
@@ -143,10 +132,8 @@ class DangasaConfig:
         try:
             current_dir = os.path.dirname(os.path.abspath(__file__))
 
-            # Faylni to'liq yo'l (absolute path) bilan topib olamiz
             source_file = os.path.join(current_dir, 'config_files/pagination.py')
 
-            # shutil modulining copy funksiyasi orqali faylni nusxalash
             shutil.copy(source_file, self.project_name)
             print(f"pagination.py create to '{self.project_name}' created successfully.")
         except FileNotFoundError:
