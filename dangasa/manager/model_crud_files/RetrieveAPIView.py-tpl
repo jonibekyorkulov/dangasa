@@ -1,6 +1,6 @@
 class {model_name}RetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = {model_name}Serializer
-    lookup_field = 'pk'  # Change 'pk' to the field you want to use for lookup
+    #lookup_field = 'pk'  # Change 'pk' to the field you want to use for lookup
     
     def get_queryset(self):
         # Optionally, customize the queryset based on specific conditions
