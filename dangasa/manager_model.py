@@ -11,16 +11,10 @@ from dangasa.manager.model_manager import ModelManager
 from django.apps import apps
 from django.conf import settings
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-os.environ['PYTHONPATH'] = f"{current_dir}:" + os.environ.get('PYTHONPATH', '')
-sys.path.append(current_dir)
-
+sys.path.append(os.getcwd())
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 django.setup(set_prefix=False)
-
-
 
 def get_project_name():
     try:
