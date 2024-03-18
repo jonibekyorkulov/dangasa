@@ -1,13 +1,9 @@
 from setuptools import setup, find_packages
 
 # Read the contents of your text file
-def read_file(filename):
-    with open(filename, 'r') as file:
-        return file.read()
 
-# Read the contents of README.md
-readme_content = read_file('README.rst')
-
+with open('README.rst', 'r', encoding='utf-8') as f:
+    long_description = f.read()
 # List of template files
 template_files = [
     'ListCreateApiView.py-tpl',
@@ -20,11 +16,11 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='0.2.3',
+    version='0.2.5',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
-    long_description=readme_content,
+    long_description= long_description,
     long_description_content_type='text/plain',
     url='https://github.com/jonibekyorkulov/dangasa',
     packages=find_packages(),
