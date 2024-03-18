@@ -16,12 +16,12 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='0.2.5',
+    version='0.2.6',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
     long_description= long_description,
-    long_description_content_type='text/plain',
+    long_description_content_type='text/x-rst',
     url='https://github.com/jonibekyorkulov/dangasa',
     packages=find_packages(),
     include_package_data=True,  # Include non-Python files specified in MANIFEST.in
@@ -42,7 +42,9 @@ setup(
         # Define additional dependencies for extra features
     },
     entry_points={
-        # Define console scripts or other entry points here
+        'console_scripts': [
+            'Dangasa = dangasa:main',
+        ],
     },
     project_urls={
         'Bug Reports': 'https://github.com/jonibekyorkulov/dangasa/issues',
