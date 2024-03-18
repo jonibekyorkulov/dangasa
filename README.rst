@@ -1,109 +1,136 @@
-# Dangasa
+Dangasa
+=======
 
-Dangasa, Django REST frameworkida CRUD (Create, Read, Update, Delete) operatsiyalarni tezroq yaratishga yordam beradigan avtomatlashtirilgan kutubxona. Faqat tayyor modellar uchun xizmat qiladi.
+Dangasa is an automated library that helps you quickly create CRUD (Create, Read, Update, Delete) operations in Django REST Framework. It only serves ready-made models.
 
-## Foydalanish
-Dangasa kutubxonasini ishlatish uchun foydalanuvchi quyidagi qadamlarni amalga oshirishi kerak:
+Usage
+-----
 
-# O'rnatish
-Birinchi navbatda, quidagi kutubxonalarni o'rnatishingiz kerak:
+To use the Dangasa library, the user needs to follow these steps:
 
-`pip install dangasa`
+Installation
+------------
 
-# Loyihani yaratish
-Loyihani yaratish uchun quyidagi qadam-larni bajaring: (yaratilayotgan loyiha 'core'  bo'lishi shart)
+First, install the following libraries:
 
-`django-admin startproject core .`
+.. code-block:: bash
 
-`python manage.py startapp home`
+    pip install dangasa
 
+Creating a Project
+------------------
 
-# settings.py faylini o'zgartirish
-Loyiha sozlamalarini o'zgartirish uchun quyidagi qadam-larni bajaring:
+To create a project, follow these steps: (the project being created must be named 'core')
 
-```python
-INSTALLED_APPS = [
-    ...
-    'home',
-]
-```
+.. code-block:: bash
 
-# endi esa home app ga  model yozamiz
-```python
-from django.db import models
+    django-admin startproject core .
 
-class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=15)
-    message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+.. code-block:: bash
 
-    def __str__(self):
-        return self.name
-```
-# yaratilgan modellarni migratsiya qilamiz
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+    python manage.py startapp home
 
 
-# urls.py faylini o'zgartirish
-Loyiha sozlamalarini o'zgartirish uchun quyidagi qadam-larni bajaring:
+Modifying settings.py
+---------------------
 
-```python
-from django.urls import path, include
+Modify project settings as follows:
 
-urlpatterns = [
-    ...
-    path('', include('home.urls')),
-]
-```
+.. code-block:: python
 
-# manage.py faylini quidagicha o'zgartiring
+    INSTALLED_APPS = [
+        ...
+        'home',
+    ]
 
-```python
-import os
-import sys
-import dangasa
+Creating Models in the home App
+-------------------------------
 
-def main():
-    if '--d' in sys.argv:
-        dangasa.main()
-    else:
-        """Run administrative tasks."""
-        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
-        try:
-            from django.core.management import execute_from_command_line
-        except ImportError as exc:
-            raise ImportError(
-                "Couldn't import Django. Are you sure it's installed and "
-                "available on your PYTHONPATH environment variable? Did you "
-                "forget to activate a virtual environment?"
-            ) from exc
-        execute_from_command_line(sys.argv)
+Now let's create models in the home app:
+
+.. code-block:: python
+
+    from django.db import models
+
+    class Contact(models.Model):
+        name = models.CharField(max_length=100)
+        email = models.EmailField()
+        phone = models.CharField(max_length=15)
+        message = models.TextField()
+        created_at = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+            return self.name
+
+Migrating Created Models
+-------------------------
+
+Migrate the created models:
+
+.. code-block:: bash
+
+    python manage.py makemigrations
+    python manage.py migrate
+
+Modifying urls.py
+------------------
+
+Modify project urls as follows:
+
+.. code-block:: python
+
+    from django.urls import path, include
+
+    urlpatterns = [
+        ...
+        path('', include('home.urls')),
+    ]
+
+Modifying manage.py
+--------------------
+
+Modify the manage.py file as follows:
+
+.. code-block:: python
+
+    import os
+    import sys
+    import dangasa
+
+    def main():
+        if '--d' in sys.argv:
+            dangasa.main()
+        else:
+            """Run administrative tasks."""
+            os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
+            try:
+                from django.core.management import execute_from_command_line
+            except ImportError as exc:
+                raise ImportError(
+                    "Couldn't import Django. Are you sure it's installed and "
+                    "available on your PYTHONPATH environment variable? Did you "
+                    "forget to activate a virtual environment?"
+                ) from exc
+            execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
-    main()
-```
+    if __name__ == '__main__':
+        main()
 
+Using Dangasa
+--------------
 
+To use Dangasa, run:
 
-# dangasa ni ishlatish
-```bash
-python manage.py --d <app_name> <model_name>
-```
+.. code-block:: bash
 
-## hozirgi holatda
+    python manage.py --d <app_name> <model_name>
 
-```bash
-python manage.py --d home Contact
-```
+Current Status
+--------------
 
-# loyihani ishga tushurish va tekshirish
-```bash
-python manage.py runserver
-```
+.. code-block:: bash
+    python manage.py --d home Contact
 
+.. code-block:: bash
+    python manage.py runserver
