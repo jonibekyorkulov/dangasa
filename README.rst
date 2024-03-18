@@ -130,7 +130,9 @@ Current Status
 --------------
 
 .. code-block:: bash
+
     python manage.py --d home Contact
 
 .. code-block:: bash
+    
     python manage.py runserver
