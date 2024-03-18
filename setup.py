@@ -6,7 +6,7 @@ def read_file(filename):
         return file.read()
 
 # Read the contents of README.md
-readme_content = read_file('README.md')
+readme_content = read_file('README.rst')
 
 # List of template files
 template_files = [
@@ -20,7 +20,7 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='0.1.0',
+    version='0.2.2',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
@@ -42,13 +42,6 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.7',
-    install_requires=[
-        'Django==4.2.2',
-        'djangorestframework==3.14.0',
-        'drf-yasg==1.21.6',
-        'typing-extensions==4.10.0',
-        'coreapi==2.3.3',
-    ],
     extras_require={
         # Define additional dependencies for extra features
     },
