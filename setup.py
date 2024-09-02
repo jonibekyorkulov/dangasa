@@ -24,7 +24,11 @@ setup(
     long_description_content_type='text/x-rst',
     url='https://github.com/jonibekyorkulov/dangasa',
     packages=find_packages(),
-    include_package_data=True,  # Include non-Python files specified in MANIFEST.in
+    install_requires=[
+        'djangorestframework>=3.14.0',
+        'drf-yasg>=1.21.6',
+    ],
+    include_package_data=True,
     package_data={'': template_files},
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -39,7 +43,7 @@ setup(
     ],
     python_requires='>=3.7',
     extras_require={
-        # Define additional dependencies for extra features
+      
     },
     entry_points={
         'console_scripts': [
