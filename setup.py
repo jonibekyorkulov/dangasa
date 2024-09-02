@@ -16,7 +16,7 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='0.2.8',
+    version='0.2.9',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
@@ -39,6 +39,8 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.7',
