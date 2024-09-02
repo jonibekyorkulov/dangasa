@@ -5,6 +5,7 @@ Dangasa.egg-info/PKG-INFO
 Dangasa.egg-info/SOURCES.txt
 Dangasa.egg-info/dependency_links.txt
 Dangasa.egg-info/entry_points.txt
+Dangasa.egg-info/requires.txt
 Dangasa.egg-info/top_level.txt
 dangasa/__init__.py
 dangasa/manager_model.py

@@ -1,12 +1,14 @@
 Metadata-Version: 2.1
 Name: Dangasa
-Version: 0.2.8
+Version: 0.2.9
 Summary: Everything is very fast with Dangasa
 Home-page: https://github.com/jonibekyorkulov/dangasa
 Author: Jonibek Yorkulov
 Author-email: jonibekyorkulov@gmail.com
+License: UNKNOWN
 Project-URL: Bug Reports, https://github.com/jonibekyorkulov/dangasa/issues
 Project-URL: Source, https://github.com/jonibekyorkulov/dangasa
+Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
@@ -15,6 +17,8 @@ Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.7
 Description-Content-Type: text/x-rst
@@ -128,3 +132,5 @@ Current Status
 .. code-block:: bash
     
     python manage.py runserver
+
+

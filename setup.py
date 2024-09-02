@@ -16,7 +16,7 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='0.2.9',
+    version='0.2.10',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
@@ -25,8 +25,8 @@ setup(
     url='https://github.com/jonibekyorkulov/dangasa',
     packages=find_packages(),
     install_requires=[
-        'djangorestframework>=3.14.0',
-        'drf-yasg>=1.21.6',
+        'djangorestframework',
+        'drf-yasg',
     ],
     include_package_data=True,
     package_data={'': template_files},
