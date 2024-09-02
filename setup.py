@@ -16,7 +16,7 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='0.2.10',
+    version='1.0.0',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
