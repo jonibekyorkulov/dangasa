@@ -16,7 +16,7 @@ template_files = [
 
 setup(
     name='Dangasa',
-    version='1.0.0',
+    version='1.0.1',
     author='Jonibek Yorkulov',
     author_email='jonibekyorkulov@gmail.com',
     description='Everything is very fast with Dangasa',
@@ -27,6 +27,7 @@ setup(
     install_requires=[
         'djangorestframework',
         'drf-yasg',
+        'typing-extensions',
     ],
     include_package_data=True,
     package_data={'': template_files},
